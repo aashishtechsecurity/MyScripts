@@ -73,9 +73,8 @@ curl -s "https://crt.sh/?q=%.$target_domain" | grep -F ".$target_domain" | sort 
 echo "Combine and sort all subdomains......"
 cat $subfinder_output $amass_output $assetfinder_output $crt_output | sort -u > $final_output
 
-echo "Move unique subdomains file outside the directory......"
-mv $final_output ./
+echo "Removing the $output_directory ......"
+rm -rf $output_directory
 
-echo "Subdomain enumeration completed. Results saved to ./$final_output and $output_directory/"
-
+echo "Subdomain enumeration completed. Results saved to ./$final_output ."
 echo "Tool Ended at:" $(date +"%d-%m-%Y %I:%M %p")
