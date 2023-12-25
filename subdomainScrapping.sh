@@ -42,22 +42,22 @@ assetfinder_output="$output_directory/assetfinder_subdomains.txt"
 crt_output="$output_directory/crt_subdomains.txt"
 final_output="all_subdomains.txt"
 
-# Run subfinder
+echo "Run subfinder......."
 subfinder -d $target_domain -o $subfinder_output
 
-# Run amass
+echo "Run amass......"
 amass enum -d $target_domain -o $amass_output
 
-# Run assetfinder
+echo "Run assetfinder....."
 assetfinder --subs-only $target_domain > $assetfinder_output
 
-# Run crt.sh enumeration
+echo "Run crt.sh enumeration......"
 curl -s "https://crt.sh/?q=%.$target_domain" | grep -F ".$target_domain" | sort -u | cut -d'>' -f2 | cut -d'<' -f1 | sort -u > $crt_output
 
-# Combine and sort all subdomains
+echo "Combine and sort all subdomains......"
 cat $subfinder_output $amass_output $assetfinder_output $crt_output | sort -u > $final_output
 
-# Move unique subdomains file outside the directory
+echo "Move unique subdomains file outside the directory......"
 mv $final_output ./
 
 echo "Subdomain enumeration completed. Results saved to ./$final_output and $output_directory/"
