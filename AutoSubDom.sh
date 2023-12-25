@@ -1,5 +1,21 @@
 #!/bin/bash
 
+echo "
+
+░█████╗░██╗░░░██╗████████╗░█████╗░░██████╗██╗░░░██╗██████╗░██████╗░░█████╗░███╗░░░███╗
+██╔══██╗██║░░░██║╚══██╔══╝██╔══██╗██╔════╝██║░░░██║██╔══██╗██╔══██╗██╔══██╗████╗░████║
+███████║██║░░░██║░░░██║░░░██║░░██║╚█████╗░██║░░░██║██████╦╝██║░░██║██║░░██║██╔████╔██║
+██╔══██║██║░░░██║░░░██║░░░██║░░██║░╚═══██╗██║░░░██║██╔══██╗██║░░██║██║░░██║██║╚██╔╝██║
+██║░░██║╚██████╔╝░░░██║░░░╚█████╔╝██████╔╝╚██████╔╝██████╦╝██████╔╝╚█████╔╝██║░╚═╝░██║
+╚═╝░░╚═╝░╚═════╝░░░░╚═╝░░░░╚════╝░╚═════╝░░╚═════╝░╚═════╝░╚═════╝░░╚════╝░╚═╝░░░░░╚═╝
+        Author   : Aashish💕💕  
+                                              
+        Github   : https://github.com/aashish36
+
+"
+echo "Tool Started at:" $(date +"%d-%m-%Y %I:%M %p")
+
+
 # Check if necessary tools are installed
 if ! command -v subfinder &> /dev/null; then
     echo "subfinder is not installed. Please install it first."
@@ -32,7 +48,7 @@ target_domain="$1"
 
 # Create a timestamped directory
 timestamp=$(date +"%Y%m%d_%H%M%S")
-output_directory="subdomains_$timestamp"
+output_directory="subdomains"
 mkdir "$output_directory"
 
 # Output files
@@ -61,3 +77,5 @@ echo "Move unique subdomains file outside the directory......"
 mv $final_output ./
 
 echo "Subdomain enumeration completed. Results saved to ./$final_output and $output_directory/"
+
+echo "Tool Ended at:" $(date +"%d-%m-%Y %I:%M %p")
