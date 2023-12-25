@@ -1,5 +1,21 @@
 #!/bin/bash
 
+echo "
+
+░██████╗░███████╗
+██╔════╝░██╔════╝
+██║░░██╗░█████╗░░
+██║░░╚██╗██╔══╝░░
+╚██████╔╝██║░░░░░
+░╚═════╝░╚═╝░░░░░
+        Author   : Aashish💕💕  
+                                              
+        Github   : https://github.com/aashish36
+
+"
+
+echo "Tool Started at:" $(date +"%d-%m-%Y %I:%M %p")
+
 # Define the list of patterns
 patterns=("xss" "ssti" "ssrf" "sqli" "redirect" "rce" "lfi" "jsvar" "interestingsubs" "interestingparams" "interestingEXT" "idor" "debug_logic" "imag-traversal")
 
@@ -29,3 +45,5 @@ do
 done
 
 echo "Pattern matching commands have been executed successfully. Output files are saved in 'gf-pattern' folder."
+
+echo "Tool Ended at:" $(date +"%d-%m-%Y %I:%M %p")
