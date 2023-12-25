@@ -16,28 +16,32 @@ echo "
 
 echo "Tool Started at:" $(date +"%d-%m-%Y %I:%M %p")
 
-# Check if a domain is provided as a command-line argument
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <domain>"
+# Check if two arguments are provided
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <domain> <listfile>"
     exit 1
 fi
 
-# Extract the domain from the command-line argument
+# Extract the domain and listfile from the command-line arguments
 domain="$1"
+listfile="$2"
+
 
 # Create a directory to store the results
 output_dir="crawling_info"
 mkdir -p $output_dir
 
-echo "[*] Processing domain: $domain"
+echo "[*] Processing Domain: $domain"
+echo "[*] Processing List File: $listfile"
+
 
 # Run Waybackurls
 echo "    Running Waybackurls..."
-echo "$domain" | /home/jaisriram/go/bin/waybackurls $domain > $output_dir/waybackurls_$domain.txt
+cat $listfile | /home/jaisriram/go/bin/waybackurls $domain > $output_dir/waybackurls_$domain.txt
 
 # Run Gau
 echo "    Running Gau..."
-echo "$domain" | /home/jaisriram/go/bin/gau  > $output_dir/gau_$domain.txt
+cat $listfile  | /home/jaisriram/go/bin/gau  > $output_dir/gau_$domain.txt
 
 # Run Hakrawler
 echo "    Running Hakrawler..."
@@ -45,7 +49,7 @@ echo "https://$domain" | hakrawler -d 10 > $output_dir/hakrawler_$domain.txt
 
 # Run Katana
 echo "    Running Katana..."
-katana -u $domain -o $output_dir/katana_$domain.txt
+katana -list $listfile -o $output_dir/katana_$domain.txt
 
 # Run WayMore
 echo "    Running WayMore..."
