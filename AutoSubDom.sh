@@ -48,7 +48,7 @@ target_domain="$1"
 
 # Create a timestamped directory
 timestamp=$(date +"%Y%m%d_%H%M%S")
-output_directory="subdomains"
+output_directory="subdomains_$timestamp"
 mkdir "$output_directory"
 
 # Output files
@@ -56,7 +56,7 @@ subfinder_output="$output_directory/subdomains.txt"
 amass_output="$output_directory/amass_subdomains.txt"
 assetfinder_output="$output_directory/assetfinder_subdomains.txt"
 crt_output="$output_directory/crt_subdomains.txt"
-final_output="all_subdomains.txt"
+final_output="unique_subdomains.txt"
 
 echo "Run subfinder......."
 subfinder -d $target_domain -o $subfinder_output
