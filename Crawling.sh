@@ -63,9 +63,6 @@ echo "[*] Combine and sort all unique URLs..."
 
 cat $output_dir/waymore_$domain.txt $output_dir/katana_$domain.txt $output_dir/hakrawler_$domain.txt $output_dir/gau_$domain.txt $output_dir/waybackurls_$domain.txt | sort -u | tee unique-crawling.txt
 
-# echo "[+] Removing the output directory $output_dir ..."
-# rm -rf $output_dir
-
 echo "[+] Saved the Unique URLs"
 
 echo "[+] Web information gathering completed. Results saved in $output_dir."
