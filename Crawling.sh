@@ -71,26 +71,3 @@ echo "[+] Saved the Unique URLs"
 echo "[+] Web information gathering completed. Results saved in $output_dir."
 
 echo "[+] Doing httpx on unique-crawling.txt ...."
-cat unique-crawling.txt | httpx -mc 200,404,401,403 -cl > unique-crawling-alive.txt
-
-echo "[+] Extracting only website from it..."
-cat unique-crawling-alive.txt |  cut -d " " -f 1 > unique-crawling-alive-websites.txt
-
-# Extract file extensions and create an array
-file_extensions=("zip" "rar" "tar" "tgz" "sql" "db" "sqlite" "pgsql.txt" "mysql.txt" "gz" "config" "log" "bak" "backup" "bkp" "crt" "dat" "eml" "java" "lst" "key" "passwd" "pl" "pwd" "mysql-connect" "jar" "cfg" "dir" "orig" "bz2" "old" "vbs" "img" "inf" "sh" "py" "vbproj" "mysql-pconnect" "war" "go" "psql" "sql.gz" "vb" "webinfo" "jnlp" "cgi" "temp" "ini" "webproj" "xsql" "raw" "inc" "lck" "nz" "rc" "html.gz" "gz" "env" "yml" "php" "asp" "aspx" "jsp" "txt" "conf" "config" "bak" "backup" "swp" "old" "db" "sqlasp" "aspx~" "asp~" "py" "py~" "rb" "rb~" "php" "php~" "bak" "bkp" "cache" "cgi" "conf" "csv" "html" "inc" "jar" "js" "json" "jsp" "jsp~" "lock" "log" "rar" "old" "sql" "sql.gz" "sql.zip" "sql.tar.gz" "sql~" "swp" "swp~" "tar" "tar.bz2" "tar.gz" "txt" "wadl" "zip")
-
-# Create a directory to store output files
-output_directory="sensitive_files"
-mkdir -p "$output_directory"
-
-# Loop through the array and run the grep command for each file extension
-for ext in "${file_extensions[@]}"; do
-    # Create a subdirectory for each file extension
-    ext_directory="${output_directory}/${ext}"
-    mkdir -p "$ext_directory"
-    
-    # Run grep command with -F and store the output in the corresponding subdirectory
-    grep -F ".$ext" unique-crawling-alive-websites.txt > "${ext_directory}/${ext}.txt"
-done
-
-echo "[*] Tool Ended at:" $(date +"%d-%m-%Y %I:%M %p")
