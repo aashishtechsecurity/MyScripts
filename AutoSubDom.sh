@@ -10,7 +10,7 @@ echo "
 ╚═╝░░╚═╝░╚═════╝░░░░╚═╝░░░░╚════╝░╚═════╝░░╚═════╝░╚═════╝░╚═════╝░░╚════╝░╚═╝░░░░░╚═╝
         Author   : Aashish💕💕  
                                               
-        Github   : https://github.com/aashish36
+        Github   : https://github.com/aashishsec
 
 "
 echo "Tool Started at:" $(date +"%d-%m-%Y %I:%M %p")
