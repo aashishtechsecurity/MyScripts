@@ -56,6 +56,7 @@ subfinder_output="$output_directory/subdomains.txt"
 amass_output="$output_directory/amass_subdomains.txt"
 assetfinder_output="$output_directory/assetfinder_subdomains.txt"
 crt_output="$output_directory/crt_subdomains.txt"
+subdomainator_output="$output_directory/subdomainator.txt"
 final_output="unique_subdomains.txt"
 
 echo "Run subfinder......."
@@ -70,11 +71,15 @@ assetfinder --subs-only $target_domain > $assetfinder_output
 echo "Run crt.sh enumeration......"
 curl -s "https://crt.sh/?q=%.$target_domain" | grep -F ".$target_domain" | sort -u | cut -d'>' -f2 | cut -d'<' -f1 | sort -u > $crt_output
 
-echo "Combine and sort all subdomains......"
-cat $subfinder_output $amass_output $assetfinder_output $crt_output | sort -u > $final_output
+echo "Running the Subdomainator......."
+python3 /home/jaisriram/tools/Subdominator/subdominator/subdominator.py -d $target_domain -o $subdomainator_output
 
-# echo "Removing the $output_directory ......"
-# rm -rf $output_directory
+echo "Running the GhostRecon"
+/bin/ghostrecon.sh $target_domain
+
+echo "Combine and sort all subdomains......"
+cat $subfinder_output $amass_output $assetfinder_output $crt_output $subdomainator_output all_domains.txt | sort -u > $final_output
 
 echo "Subdomain enumeration completed. Results saved to ./$final_output ."
+echo -e "${GREEN}Number of Subdomains for ${domain} is $(cat unique_subdomains.txt | wc -l).${RESET}"
 echo "Tool Ended at:" $(date +"%d-%m-%Y %I:%M %p")
