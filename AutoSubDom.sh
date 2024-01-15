@@ -80,6 +80,7 @@ echo "Running the GhostRecon"
 echo "Combine and sort all subdomains......"
 cat $subfinder_output $amass_output $assetfinder_output $crt_output $subdomainator_output all_domains.txt | sort -u > $final_output
 
-echo "Subdomain enumeration completed. Results saved to ./$final_output ."
+rm -rf $output_directory all_domains.txt
+echo "Subdomain enumeration completed. Results saved to $final_output ."
 echo -e "${GREEN}Number of Subdomains for ${domain} is $(cat unique_subdomains.txt | wc -l).${RESET}"
 echo "Tool Ended at:" $(date +"%d-%m-%Y %I:%M %p")
