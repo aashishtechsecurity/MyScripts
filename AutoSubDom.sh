@@ -74,9 +74,6 @@ curl -s "https://crt.sh/?q=%.$target_domain" | grep -F ".$target_domain" | sort 
 echo "Running the Subdomainator......."
 python3 /home/jaisriram/tools/Subdominator/subdominator/subdominator.py -d $target_domain -o $subdomainator_output
 
-echo "Running the GhostRecon"
-/bin/ghostrecon.sh $target_domain
-
 echo "Combine and sort all subdomains......"
 cat $subfinder_output $amass_output $assetfinder_output $crt_output $subdomainator_output all_domains.txt | sort -u > $final_output
 
