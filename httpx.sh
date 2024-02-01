@@ -39,8 +39,12 @@ echo "Extracting unique websites from httpx.txt and saving to httpx-website.txt"
 cat httpx.txt | cut -d " " -f 1 | tee httpx-website.txt
 
 # Extract all alive (HTTP status code 200) websites from httpx.txt and save them to httpx-website-alive.txt
-echo "Extracting alive websites (HTTP status code 200) from httpx.txt and saving to httpx-website-alive.txt"
-cat httpx.txt | grep 200 | cut -d " " -f 1 | tee httpx-website-alive.txt
+echo "Extracting alive websites (HTTP status code 200) from httpx.txt and saving to httpx-website-alive.txt....."
+cat httpx.txt | grep 200 | cut -d " " -f 1 >> httpx-website-alive.txt
+cat httpx.txt | grep 302 | cut -d " " -f 1 >> httpx-website-alive.txt
+cat httpx.txt | grep 403 | cut -d " " -f 1 >> httpx-website-alive.txt
+cat httpx-website-alive.txt |  sort -u > httpx-website-alive1.txt
+echo "Tool Ended at:" $(date +"%d-%m-%Y %I:%M %p")
 
 echo "Tool Ended at:" $(date +"%d-%m-%Y %I:%M %p")
 
