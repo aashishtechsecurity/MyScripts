@@ -8,8 +8,8 @@ echo "
 ██╔══██║██║░░░██║░░░██║░░░██║░░██║░╚═══██╗██║░░░██║██╔══██╗██║░░██║██║░░██║██║╚██╔╝██║
 ██║░░██║╚██████╔╝░░░██║░░░╚█████╔╝██████╔╝╚██████╔╝██████╦╝██████╔╝╚█████╔╝██║░╚═╝░██║
 ╚═╝░░╚═╝░╚═════╝░░░░╚═╝░░░░╚════╝░╚═════╝░░╚═════╝░╚═════╝░╚═════╝░░╚════╝░╚═╝░░░░░╚═╝
-        Author   : Aashish💕💕  
-                                              
+        Author   : Aashish💕💕
+
         Github   : https://github.com/aashishsec
 
 "
@@ -62,9 +62,6 @@ final_output="unique_subdomains.txt"
 echo "Run subfinder......."
 subfinder -d $target_domain -o $subfinder_output
 
-echo "Run amass......"
-amass enum -d $target_domain -o $amass_output
-
 echo "Run assetfinder....."
 assetfinder --subs-only $target_domain > $assetfinder_output
 
@@ -72,12 +69,15 @@ echo "Run crt.sh enumeration......"
 curl -s "https://crt.sh/?q=%.$target_domain" | grep -F ".$target_domain" | sort -u | cut -d'>' -f2 | cut -d'<' -f1 | sort -u > $crt_output
 
 echo "Running the Subdomainator......."
-python3 /home/jaisriram/tools/Subdominator/subdominator/subdominator.py -d $target_domain -o $subdomainator_output
+python3 /home/jaisriram/tools/Subdominator/subdominator/subdominator.py -r -d $target_domain -o $subdomainator_output
+
+echo "Run amass......"
+amass enum -d $target_domain -o $amass_output
 
 echo "Combine and sort all subdomains......"
 cat $subfinder_output $amass_output $assetfinder_output $crt_output $subdomainator_output all_domains.txt | sort -u > $final_output
 
 rm -rf $output_directory all_domains.txt
-echo "Subdomain enumeration completed. Results saved to $final_output ."
+echo "Subdomain enumeration completed. Results saved to ./$final_output ."
 echo -e "${GREEN}Number of Subdomains for ${domain} is $(cat unique_subdomains.txt | wc -l).${RESET}"
 echo "Tool Ended at:" $(date +"%d-%m-%Y %I:%M %p")
