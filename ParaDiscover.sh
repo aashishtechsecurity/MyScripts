@@ -11,7 +11,7 @@ OUTPUT_DIR="./output"
 # Create output directory if not exists
 mkdir -p $OUTPUT_DIR
 
-WAYBACK_URL="https://web.archive.org/cdx/search/cdx?url=${DOMAIN}&collapse=domain&fl=timestamp,original,mimetype,statuscode,digest"
+WAYBACK_URL="https://web.archive.org/cdx/search/cdx?url=${DOMAIN}/&matchType=domain&fl=original&collapse=urlkey"
 CCRAWL_INDEX_URL="https://index.commoncrawl.org/collinfo.json"
 ALIENVAULT_URL="https://otx.alienvault.com/api/v1/indicators/domain/${DOMAIN}/url_list?limit=500"
 URLSCAN_URL="https://urlscan.io/api/v1/search/?q=domain:${DOMAIN}&size=10000"
