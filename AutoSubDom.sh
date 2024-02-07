@@ -77,6 +77,13 @@ amass enum -d $target_domain -o $amass_output
 echo "Combine and sort all subdomains......"
 cat $subfinder_output $amass_output $assetfinder_output $crt_output $subdomainator_output all_domains.txt | sort -u > $final_output
 
+
+echo "Subdomains found by subfinder: $(cat $subfinder_output | wc -l)"
+echo "Subdomains found by assetfinder: $(cat $assetfinder_output | wc -l)"
+echo "Subdomains found by crt.sh: $(cat $crt_output | wc -l)"
+echo "Subdomains found by Subdomainator: $(cat $subdomainator_output | wc -l)"
+echo "Subdomains found by amass: $(cat $amass_output | wc -l)"
+
 rm -rf $output_directory all_domains.txt
 echo "Subdomain enumeration completed. Results saved to ./$final_output ."
 echo -e "${GREEN}Number of Subdomains for ${domain} is $(cat unique_subdomains.txt | wc -l).${RESET}"
